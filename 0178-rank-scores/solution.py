@@ -1,0 +1,8 @@
+import pandas as pd
+
+def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
+    data= pd.DataFrame(scores['score'].sort_values(ascending = False).unique())
+    data['rank'] = list(range(1,len(data)+1))   
+    updated_data = pd.merge(scores , data , how = 'inner' , left_on = 'score' , right_on= 0 )
+    return updated_data[['score','rank']].sort_values( by = 'score' , ascending = False)
+    
