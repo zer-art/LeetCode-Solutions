@@ -1,0 +1,8 @@
+import pandas as pd
+
+def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
+    customer_orders = orders['customer_number'].value_counts().sort_values(ascending = False )
+    highest_order = customer_orders.index[:1]
+    result = pd.DataFrame(highest_order)
+    return result
+    
