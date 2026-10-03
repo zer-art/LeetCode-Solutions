@@ -21,4 +21,4 @@ All solutions are organized by topic (or you can organize by difficulty/problem 
 * [Python / Java / C++ / JavaScript]
 
 ### 🔗 Connect
-Check out my live progress on my [LeetCode Profile](insert_your_leetcode_link_here).
+Check out my live progress on my [LeetCode Profile](https://leetcode.com/u/u3uaVEi1eF/).
