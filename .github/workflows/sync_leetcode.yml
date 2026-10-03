@@ -9,6 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Sync
+        id: sync
+        continue-on-error: true
+        uses: joshcai/leetcode-sync@v1.7
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+      - name: Retry sync once on transient LeetCode API failures
+        if: steps.sync.outcome == 'failure'
         uses: joshcai/leetcode-sync@v1.7
         with:
           github-token: ${{ github.token }}
