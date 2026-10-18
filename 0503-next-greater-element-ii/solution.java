@@ -1,37 +1,23 @@
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
-        int n = nums.length;
-        int[] result = new int[n];
-        
-        // Initialize result array with -1
-        // If an element never finds a greater element, it remains -1
-        for (int i = 0; i < n; i++) {
-            result[i] = -1;
+        int result [] = new int [nums.length] ; 
+        Deque<Integer> st = new ArrayDeque<>() ; 
+
+        for ( int i = 0 ; i < nums.length ; i++ ){ 
+            result[i] = -1 ; 
         }
-        
-        // The stack will store the INDICES of the elements, not the values.
-        Deque<Integer> stack = new ArrayDeque<>();
-        
-        // Loop 2 * n times to simulate a circular array
-        for (int i = 0; i < 2 * n; i++) {
-            // Use modulo operator to wrap around the index
-            int currentIndex = i % n;
-            
-            // While stack is not empty AND the current element is strictly greater 
-            // than the element at the index stored at the top of the stack
-            while (!stack.isEmpty() && nums[currentIndex] > nums[stack.peek()]) {
-                // We found the next greater element for the index at the top of the stack!
-                int prevIndex = stack.pop();
-                result[prevIndex] = nums[currentIndex];
+        for ( int i = 0 ; i < nums.length*2 ; i++ ){ 
+            int currIdx = i % nums.length ; 
+
+            while ( !st.isEmpty() && nums[currIdx] >  nums[st.peek()]){ 
+                int prevIdx = st.pop() ; 
+                result[prevIdx] = nums[currIdx] ; 
             }
-            
-            // Only push indices during the first pass (i < n)
-            // No need to push during the second pass, we just use it to resolve remaining items
-            if (i < n) {
-                stack.push(currentIndex);
+
+            if(i < nums.length){ 
+                st.push(currIdx) ; 
             }
         }
-        
-        return result;
+        return result ;  
     }
 }
